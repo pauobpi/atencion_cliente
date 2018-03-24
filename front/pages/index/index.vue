@@ -2,19 +2,19 @@
     <div>
         <div class="login">
             <ul>
-                <li>
+                <li class="login__li">
                     <img src="">
                 </li>
-                <li>
+                <li class="login__li">
                     <label>Email</label>
-                    <input type="text">
+                    <input type="text" v-model="filter_email">
                 </li>
-                <li>
+                <li class="login__li">
                     <label>Password</label>
-                    <input type="password">
+                    <input type="password" v-model="filter_password">
                 </li>
-                <li>
-                    <span>Entrar</span>
+                <li class="login__li">
+                    <span @click="verifyUser()">Entrar</span>
                 </li>
             </ul>
         </div>
