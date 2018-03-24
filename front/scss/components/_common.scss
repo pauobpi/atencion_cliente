@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    &::placeholder {
+        color: map-get($colors, gray--soft-dark);
+    }
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans';
+    overflow-x: hidden;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: map-get($colors, gray--dark);
+}
+
+.router-link-exact-active {
+    color: map-get($colors, blue);
+}
+
+.version {
+    @include border('',1,blue);
+
+    color: map-get($colors, blue);
+    border-radius: 5px;
+    font-size: 10px;
+    letter-spacing:0.4px;
+    padding: 0 5px;
+    position: relative;
+    top: -13px;
+    left: 8px;
+}

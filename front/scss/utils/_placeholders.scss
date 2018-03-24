@@ -1,0 +1,126 @@
+// file: placeholders.scss
+// Descript: placeholders web
+// version: v.1
+// Author: Citric
+
+// -
+
+// Table of contents
+// ============================
+
+// 01. PLACEHOLDERS
+// ------------------------
+
+// ======================================================
+// 01. PLACEHOLDERS
+// ======================================================
+
+	//  1.1 container -> Container of page
+	// --------------------------------------------------
+
+		%container{
+			background: map-get($colors, blue--gray);
+			position: absolute;
+			width: 100%;
+			right: 0;
+			height: 100%;
+			overflow: auto;
+		}
+
+	//  1.2 Page -> page format
+	// --------------------------------------------------
+		%page{
+			position: relative;
+			min-width: 500px;
+			max-width: 800px;
+			width: 70%;
+			min-height: 450px;
+			background:  map-get($colors, white);
+			margin: 50px auto;
+			border-radius: 4px;
+			box-shadow: 0 1px 1px rgba(190,190,190,.4);
+			padding: 30px 40px 60px;
+			border: solid 1px map-get($colors, gray--light);
+		}
+
+	// 1.3. items
+	// -------------------------------------------
+
+		%style__item{
+			@include border('',2,gray--light);
+			color: map-get($colors,black);
+			padding: 10px 12px;
+			border-radius: 4px;
+			@include text('Open Sans',16,black,400,inherit,left);
+			width: 100%;
+			outline: none;
+			background: map-get($colors, white);
+			resize: vertical;
+			&:focus{
+				@include border('',2,blue--soft);
+			}
+		}
+
+		%style__checkandradio{
+			content: '';
+			width: 15px;
+			height: 15px;
+			position: relative;
+			float: left;
+			margin: 2px 7px 0 0;
+			@include border('',2,gray--light);
+			font-size: 9px;
+			border-radius: 4px;
+			line-height: 16px;
+			text-align: center;
+			appearance:  none;
+			-webkit-appearance: none;
+			&:hover{
+				@include border('',2,gray);
+			}
+		}
+
+	// 1.4. Modal
+	// -------------------------------------------
+
+		%modal{
+			overflow: auto;
+			position: fixed;
+			top: 40%;
+			left: 50%;
+			box-shadow: 0 2px 75px rgba(0,0,0,.15);
+			z-index: 100;
+			opacity: 0;
+			visibility: hidden;
+			background: map-get($colors,white);
+			border-radius: 4px;
+			max-height: 450px;
+			padding: 40px;
+		}
+
+	// 1.5. Icon in h3
+	// -------------------------------------------
+		%icon__inh3{
+			font-size: 18px;
+			margin:9px 0 0 8px;
+			position: absolute;
+			cursor: pointer;
+			&:hover{
+				color: map-get($colors,blue);
+			}
+		}
+
+		%icon_moon_query {
+			font-size: 18px;
+			text-align: center;
+			font-family: 'icomoon';
+			margin: 10px 18px 5px;
+			position: relative;
+			float: left;
+			border: solid 1px;
+			padding: 9px;
+			border-radius: 50%;
+			width: 20px;
+			height: 20px;
+			line-height: 20px;
+		}
