@@ -3826,7 +3826,8 @@ const SHA256 = __webpack_require__(5);
             languaje: 'EN',
             info_mensaje: '',
             currentDescription: '',
-            currentTitle: ''
+            currentTitle: '',
+            idActive: ''
         };
     },
     methods: {
@@ -3840,6 +3841,7 @@ const SHA256 = __webpack_require__(5);
             this.id_message = idResponse;
             this.currentDescription = description;
             this.currentTitle = title;
+            this.idActive = idResponse;
             var information = [idResponse];
             transferBytes.connect('46ab88100d6d0071926776d015d65111', this.languaje, information).then(result => {
                 this.textArea = true;
@@ -3994,6 +3996,9 @@ const SHA256 = __webpack_require__(5);
                 this.$parent.hideComplainModal();
                 this.$parent.$parent.getUserComplains();
             });
+        },
+        modalClose() {
+            this.$parent.hideComplainModal();
         }
     },
     props: ['id', 'visible']
@@ -22459,11 +22464,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "login" }, [
-      _c("ul", [
+      _c("ul", { staticClass: "login__content" }, [
         _vm._m(0),
         _vm._v(" "),
         _c("li", { staticClass: "login__li" }, [
-          _c("label", [_vm._v("Email")]),
+          _c("label", { staticClass: "login__label" }, [_vm._v("Email")]),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -22474,7 +22479,8 @@ var render = function() {
                 expression: "filter_email"
               }
             ],
-            attrs: { type: "text" },
+            staticClass: "item__input",
+            attrs: { type: "text", placeholder: "mi@email.com" },
             domProps: { value: _vm.filter_email },
             on: {
               input: function($event) {
@@ -22488,7 +22494,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("li", { staticClass: "login__li" }, [
-          _c("label", [_vm._v("Password")]),
+          _c("label", { staticClass: "login__label" }, [_vm._v("Contraseña")]),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -22499,7 +22505,8 @@ var render = function() {
                 expression: "filter_password"
               }
             ],
-            attrs: { type: "password" },
+            staticClass: "item__input",
+            attrs: { type: "password", placeholder: "••••••••" },
             domProps: { value: _vm.filter_password },
             on: {
               input: function($event) {
@@ -22512,19 +22519,24 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c("li", { staticClass: "login__li" }, [
-          _c(
-            "span",
-            {
-              on: {
-                click: function($event) {
-                  _vm.verifyUser()
+        _c(
+          "li",
+          { staticClass: "login__li", staticStyle: { "text-align": "center" } },
+          [
+            _c(
+              "span",
+              {
+                staticClass: "buttonLog",
+                on: {
+                  click: function($event) {
+                    _vm.verifyUser()
+                  }
                 }
-              }
-            },
-            [_vm._v("Entrar")]
-          )
-        ])
+              },
+              [_c("strong", [_vm._v("Entrar")])]
+            )
+          ]
+        )
       ])
     ])
   ])
@@ -22534,9 +22546,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "login__li" }, [
-      _c("img", { attrs: { src: "" } })
-    ])
+    return _c(
+      "li",
+      { staticClass: "login__li", staticStyle: { "text-align": "center" } },
+      [
+        _c("img", {
+          staticClass: "logo",
+          attrs: { src: "assets/img/atrapalo.png" }
+        })
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -22701,6 +22720,7 @@ var render = function() {
               }
             ],
             staticClass: "item__input",
+            staticStyle: { height: "170px" },
             domProps: { value: _vm.info_descripcin },
             on: {
               input: function($event) {
@@ -22730,6 +22750,12 @@ var render = function() {
             _vm._v("Enviar")
           ])
         ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "modal__close", on: { click: _vm.modalClose } },
+          [_c("span", { staticClass: "icon icon-close" })]
+        ),
         _vm._v(" "),
         _c("div", { staticClass: "modal__bg" })
       ])
@@ -22850,7 +22876,10 @@ var render = function() {
               "li",
               {
                 staticClass: "complains__list",
-                class: [item.quejaSolucionada == "Si" ? "done" : ""],
+                class: [
+                  item.quejaSolucionada == "Si" ? "done" : "",
+                  _vm.idActive == item.idqueja ? "active" : ""
+                ],
                 on: {
                   click: function($event) {
                     _vm.complainsResponses(

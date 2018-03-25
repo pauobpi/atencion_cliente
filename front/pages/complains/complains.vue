@@ -3,7 +3,7 @@
         <div class="complains">
             <headerclass :id="id"/>
             <ul class="complains__ul">
-                <li v-for="item in complain" v-model="item.idPost"  @click="complainsResponses(item.idqueja, item.ttuloDeQueja, item.descripcin)" class="complains__list" :class="[item.quejaSolucionada == 'Si' ? 'done' : '']">
+                <li v-for="item in complain" v-model="item.idPost"  @click="complainsResponses(item.idqueja, item.ttuloDeQueja, item.descripcin)" class="complains__list" :class="[item.quejaSolucionada == 'Si' ? 'done' : '', idActive == item.idqueja ? 'active' : '']">
                     <span v-if="item.quejaSolucionada == 'Si'" class="icon icon-check"></span>{{ item.ttuloDeQueja }}
                 </li>
             </ul>

@@ -30,6 +30,9 @@ export default {
                 this.$parent.hideComplainModal();
                 this.$parent.$parent.getUserComplains();
             });
+        },
+        modalClose() {
+           this.$parent.hideComplainModal();
         }
     },
     props: ['id', 'visible']

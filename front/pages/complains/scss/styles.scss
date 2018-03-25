@@ -22,7 +22,7 @@
         overflow: hidden;
         white-space: nowrap;
 
-        &:hover {
+        &:hover, &.active {
             color: map-get($colors, red);
         }
     }
@@ -64,8 +64,8 @@
     }
 
     &__txt {
-        margin: 3px 0 0 20px;
-        font-size: 18px;
+        margin: 5px 0 0 20px;
+        font-size: 16px;
     }
 
     .item__input {
