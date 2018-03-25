@@ -1,15 +1,16 @@
 <template>
-    <div v-if="visible">
-        <label><strong>Título de queja</strong></label>
-        <input v-model="info_ttuloDeQueja" type="text">
-
-        <label><strong>Descripción</strong></label>
-        <textarea v-model="info_descripcin"></textarea>
-
-        <label><strong>Captura pantalla</strong></label>
-        <input id="info_capturaPantalla" type="file">
-
-        <span class="button"><button v-on:click ="newComplain">Upload Information</button></span>
+    <div v-if="visible" class="modal">
+        <div class="modal__content">
+            <h3>Nueva Petición</h3>
+            <label>Título</label>
+            <input v-model="info_ttuloDeQueja" type="text" class="item__input">
+            <label>Descripción</label>
+            <textarea  class="item__input" v-model="info_descripcin"></textarea>
+            <input id="info_capturaPantalla" type="file" style="display:none;">
+            <label for="info_capturaPantalla" class="item__file hide">Subir Captura de pantalla</label>
+            <span class="btn" v-on:click ="newComplain">Enviar</span>
+        </div>
+        <div class="modal__bg"></div>
     </div>
 </template>
 

@@ -47,7 +47,7 @@
 	// -------------------------------------------
 
 		%style__item{
-			@include border('',2,gray--light);
+			@include border('',1,gray);
 			color: map-get($colors,black);
 			padding: 10px 12px;
 			border-radius: 4px;
@@ -57,7 +57,7 @@
 			background: map-get($colors, white);
 			resize: vertical;
 			&:focus{
-				@include border('',2,blue--soft);
+				@include border('',1,black);
 			}
 		}
 

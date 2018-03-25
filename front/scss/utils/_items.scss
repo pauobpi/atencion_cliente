@@ -1,0 +1,380 @@
+// file: items.scss
+// Descript: Items web
+// version: v.1
+// Author: Citric
+
+// -
+
+// Table of contents
+// ============================
+
+// 01. ITEMS
+// ------------------------
+
+// ======================================================
+// 01. ITEMS
+// ======================================================
+
+	// 1.0 Title
+	// -------------------------------------------
+
+		.item__title{
+			border: none;
+			@include border(bottom,1,gray);
+			padding-bottom: 10px;
+			@include text('Dosis',30,black,600,inherit,left);
+			width: 100%;
+			margin-bottom: 20px;
+			&:focus{
+				@include border(bottom,2,blue--soft);
+			}
+		}
+
+	//  1.0 Label
+	// --------------------------------------------------
+
+		.item__label{
+			@include text('Dosis',17,black,600,inherit,left);
+			margin-bottom: 5px;
+			position: relative;
+			float: left;
+			width: 100%;
+			letter-spacing: .4px;
+		}
+
+	//  1.1 Input
+	// --------------------------------------------------
+
+		.item__input{
+			@extend %style__item;
+			margin-bottom: 10px;
+			&--w1{
+				@extend %style__item;
+				width: 100%;
+			}
+			&--w2{
+				@extend %style__item;
+				width: 50%;
+			}
+			&--w3{
+				@extend %style__item;
+				width: 32%;
+			}
+			&--w4{
+				@extend %style__item;
+				width: 25%;
+			}
+		}
+
+	//  1.2 Select
+	// --------------------------------------------------
+		.date__separator {
+			float: left;
+			padding: 11px 10px 11px 9px;
+		}
+
+		.date__text {
+			color: map-get($colors, gray);
+			font-size: 10px;
+			text-transform: uppercase;
+		}
+
+		.item__select{
+			@extend %style__item;
+			display: block;
+			width: 40%;
+			appearance: none;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			cursor: pointer;
+			background: map-get($colors, blue--gray);
+			@include border('',2, blue--gray);
+			&:hover{
+				background: map-get($colors, blue--gray);
+				@include border('',2, blue);
+			}
+			&.item__date {
+				width: 46px;
+				float: left;
+				margin-right: 5px;
+				background: map-get($colors, blue--gray);
+				@include border('',2, blue--gray);
+				position: relative;
+				&:hover{
+					@include border('',2, blue);
+				}
+				&.year {
+					width: 65px;
+				}
+			}
+		}
+
+		.item__select--arrow:before{
+		    content: "\e903";
+		    font-family: 'icomoon' !important;
+		    position: absolute;
+		    left: calc(40% - 30px);
+		    top: 44px;
+		    font-size: 9px;
+			color: map-get($colors, gray);
+			z-index: 20;
+		}
+
+	//  1.3 Image & Files
+	// --------------------------------------------------
+
+		.item__image,
+		.item__file{
+			@extend %style__item;
+			border: none;
+			width: 245px;
+			padding-left: 40px;
+			background: map-get($colors, gray--light);
+			float: left;
+			position: relative;
+			cursor: pointer;
+			&:hover{
+				background: map-get($colors, red);
+				color: #fff;
+			}
+			&::before{
+				content: "\e91a";
+				font-family: 'icomoon' !important;
+				position: absolute;
+				left: 12px;
+				font-size: 18px;
+			}
+		}
+		.item__file--ul{
+			width: 100%;
+			float: left;
+			position: relative;
+			margin: 10px 0;
+			.item__file--list{
+				@extend %style__item;
+				border: none;
+				padding: 8px 15px;
+				float: left;
+				width: 200px;
+				height: 35px;
+				margin-top: 4px;
+				background: map-get($colors, gray--extra-light);
+			}
+		}
+
+	//  1.4 Checkbox
+	// --------------------------------------------------
+
+		.item__checkbox {
+			&+ label{
+				@extend %style__item;
+				border: none !important;
+				float: left;
+				padding: 5px 0;
+				cursor: pointer;
+				&::before{
+					@extend %style__checkandradio;
+				}
+			}
+
+			&:checked + label{
+				&::before{
+					content: '\e905';
+					font-family: 'icomoon' !important;
+					@include border('',2,blue);
+					background: map-get($colors, blue);
+					color: map-get($colors, white);
+				}
+			}
+		}
+
+	//  1.5 Radio button
+	// --------------------------------------------------
+
+		.query__input--condition { display: none; }
+		
+		.item__radio {
+			&+ label{
+				@extend %style__item;
+				border: none;
+				float: left;
+				padding: 5px 0;
+				cursor: pointer;
+				&::before{
+					@extend %style__checkandradio;
+					border-radius: 50%;
+				}
+			}
+
+			&:checked + label {
+				&::before{
+					content: '\e905';
+					font-family: 'icomoon' !important;
+					@include border('',2,blue);
+					background: map-get($colors, blue);
+					color: map-get($colors, white);
+				}
+
+				& + .query__select--condition {
+					background: map-get($colors, blue);
+					color: map-get($colors, white);
+					@include border('',2,blue);
+				}
+				
+				& + .query__select--condition + input {
+					display: block !important;
+				}
+			}
+		}
+
+	//  1.6 Section
+	// --------------------------------------------------
+		.item__section {
+			@include text('Dosis',20,black,700,inherit,left);
+			h3{
+				margin: 10px 0 5px;
+				display: block;
+				width: 100%;
+				float: left;
+			}
+		}
+
+	// 1.7 item query-type
+	// -------------------------------------------
+
+	.item__query-type {
+		&+ label{
+			width: 80px;
+			height: 80px;
+			@include border('',2,gray--light);
+			margin: 10px 8px 0 0;
+			float: left;
+			position: relative;
+			border-radius: 4px;
+			cursor: pointer;
+			text-align: center;
+			&:hover{
+				@include border('',2,blue);
+			}
+			&:first-child{ margin-left: 0; }
+			&.upload::before {
+				@extend %icon_moon_query;
+				content:'\e902';
+				color: map-get($colors, green);
+			}
+			&.download::before {
+				@extend %icon_moon_query;
+				content:'\e900';
+				color: map-get($colors, blue);
+			}
+			&.refresh::before {
+				@extend %icon_moon_query;
+				content:'\e901';
+				color: map-get($colors, yellow);
+			}
+			p {
+				font-size: 9px;
+				text-transform: uppercase;
+			}
+		}
+
+		&:checked + label{
+			background: map-get($colors, blue);
+			color: map-get($colors, white);
+			@include border('',2,blue);
+
+			&.upload::before,
+			&.download::before {
+				color: map-get($colors, white);
+			}
+		}
+	}
+ 
+	.item-color {
+		&__input {
+			border-left: solid 2px map-get($itemscolors, input);
+		}
+		&__text {
+			border-left: solid 2px map-get($itemscolors, text);
+		}
+		&__image {
+			border-left: solid 2px map-get($itemscolors, image);
+		}
+		&__file {
+			border-left: solid 2px map-get($itemscolors, file);
+		}
+		&__radio {
+			border-left: solid 2px map-get($itemscolors, radio);
+		}
+		&__checkbox {
+			border-left: solid 2px map-get($itemscolors, checkbox);
+		}
+		&__select {
+			border-left: solid 2px map-get($itemscolors, select);
+		}
+		&__date {
+			border-left: solid 2px map-get($itemscolors, date);
+		}
+		&__section {
+			border-left: solid 2px map-get($itemscolors, section);
+		}
+	}
+
+	.bg-color {
+		&__item {
+			background: map-get($itemscolors, input) !important;
+			& + input {
+				border-left: solid 2px map-get($itemscolors, input);  
+			} 
+		}
+		&__text {
+			background: map-get($itemscolors, text) !important;
+			& + input {
+				border-left: solid 2px map-get($itemscolors, text);  
+			} 
+		}
+		&__image {
+			background: map-get($itemscolors, image) !important;
+			& + input {
+				border-left: solid 2px map-get($itemscolors, image);  
+			} 
+		}
+		&__file {
+			background: map-get($itemscolors, file) !important;
+			& + input {
+				border-left: solid 2px map-get($itemscolors, file);  
+			} 
+		}
+		&__radio {
+			background: map-get($itemscolors, radio) !important;
+			& + input {
+				border-left: solid 2px map-get($itemscolors, radio);  
+			} 
+		}
+		&__checkbox {
+			background: map-get($itemscolors, checkbox) !important;
+			& + input {
+				border-left: solid 2px map-get($itemscolors, checkbox);  
+			} 
+		}
+		&__select {
+			background: map-get($itemscolors, select) !important;
+			& + input {
+				border-left: solid 2px map-get($itemscolors, select);  
+			} 
+		}
+		&__date {
+			background: map-get($itemscolors, date) !important;
+			& + input {
+				border-left: solid 2px map-get($itemscolors, date);  
+			} 
+		}
+		&__section {
+			background: map-get($itemscolors, section) !important;
+			& + input {
+				border-left: solid 2px map-get($itemscolors, section);  
+			} 
+		}
+	}	
+
+

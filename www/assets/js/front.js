@@ -22661,84 +22661,81 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.visible
-    ? _c("div", [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.info_ttuloDeQueja,
-              expression: "info_ttuloDeQueja"
-            }
-          ],
-          attrs: { type: "text" },
-          domProps: { value: _vm.info_ttuloDeQueja },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+    ? _c("div", { staticClass: "modal" }, [
+        _c("div", { staticClass: "modal__content" }, [
+          _c("h3", [_vm._v("Nueva Petición")]),
+          _vm._v(" "),
+          _c("label", [_vm._v("Título")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.info_ttuloDeQueja,
+                expression: "info_ttuloDeQueja"
               }
-              _vm.info_ttuloDeQueja = $event.target.value
-            }
-          }
-        }),
-        _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _c("textarea", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.info_descripcin,
-              expression: "info_descripcin"
-            }
-          ],
-          domProps: { value: _vm.info_descripcin },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+            ],
+            staticClass: "item__input",
+            attrs: { type: "text" },
+            domProps: { value: _vm.info_ttuloDeQueja },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.info_ttuloDeQueja = $event.target.value
               }
-              _vm.info_descripcin = $event.target.value
             }
-          }
-        }),
-        _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
-        _c("input", { attrs: { id: "info_capturaPantalla", type: "file" } }),
-        _vm._v(" "),
-        _c("span", { staticClass: "button" }, [
-          _c("button", { on: { click: _vm.newComplain } }, [
-            _vm._v("Upload Information")
+          }),
+          _vm._v(" "),
+          _c("label", [_vm._v("Descripción")]),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.info_descripcin,
+                expression: "info_descripcin"
+              }
+            ],
+            staticClass: "item__input",
+            domProps: { value: _vm.info_descripcin },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.info_descripcin = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            staticStyle: { display: "none" },
+            attrs: { id: "info_capturaPantalla", type: "file" }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              staticClass: "item__file hide",
+              attrs: { for: "info_capturaPantalla" }
+            },
+            [_vm._v("Subir Captura de pantalla")]
+          ),
+          _vm._v(" "),
+          _c("span", { staticClass: "btn", on: { click: _vm.newComplain } }, [
+            _vm._v("Enviar")
           ])
-        ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "modal__bg" })
       ])
     : _vm._e()
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [_c("strong", [_vm._v("Título de queja")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [_c("strong", [_vm._v("Descripción")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [_c("strong", [_vm._v("Captura pantalla")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -22781,6 +22778,7 @@ var render = function() {
               },
               [
                 _c("img", {
+                  staticClass: "header__img",
                   attrs: {
                     src:
                       "http://www.transferbytes.io/src/imgs/res_" +
@@ -22789,25 +22787,29 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("span", [_vm._v(_vm._s(item.nombre))]),
+                _c("span", { staticClass: "header__name" }, [
+                  _vm._v(_vm._s(item.nombre))
+                ]),
                 _vm._v(" "),
-                _c("p", [_vm._v(_vm._s(item.email))])
+                _c("p", { staticClass: "header__email" }, [
+                  _vm._v(_vm._s(item.email))
+                ])
               ]
             )
           }),
           _vm._v(" "),
-          _c("div", { on: { hidemodal: _vm.hideComplainModal } }),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "header__new-complain",
-              on: { click: _vm.viewComplainModal }
-            },
-            [_vm._v("Nueva queja")]
-          )
+          _c("div", { on: { hidemodal: _vm.hideComplainModal } })
         ],
         2
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "header__new-complain",
+          on: { click: _vm.viewComplainModal }
+        },
+        [_vm._v("+")]
       )
     ],
     1
@@ -22833,135 +22835,123 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("headerclass", { attrs: { id: _vm.id } }),
-      _vm._v(" "),
-      _c("div", { staticClass: "container" }, [
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "complains" },
+      [
+        _c("headerclass", { attrs: { id: _vm.id } }),
+        _vm._v(" "),
         _c(
-          "div",
-          { staticClass: "columns" },
-          [
-            _vm._l(_vm.complain, function(item) {
-              return _c(
-                "ul",
-                {
-                  staticClass: "column is-3 complains",
-                  model: {
-                    value: item.idPost,
-                    callback: function($$v) {
-                      _vm.$set(item, "idPost", $$v)
-                    },
-                    expression: "item.idPost"
+          "ul",
+          { staticClass: "complains__ul" },
+          _vm._l(_vm.complain, function(item) {
+            return _c(
+              "li",
+              {
+                staticClass: "complains__list",
+                class: [item.quejaSolucionada == "Si" ? "done" : ""],
+                on: {
+                  click: function($event) {
+                    _vm.complainsResponses(
+                      item.idqueja,
+                      item.ttuloDeQueja,
+                      item.descripcin
+                    )
                   }
                 },
-                [
-                  _c(
-                    "li",
-                    {
-                      on: {
-                        click: function($event) {
-                          _vm.complainsResponses(
-                            item.idqueja,
-                            item.ttuloDeQueja,
-                            item.descripcin
-                          )
-                        }
-                      }
-                    },
-                    [
-                      item.quejaSolucionada == "Si"
-                        ? _c("span", [_vm._v("Solucionada")])
-                        : _vm._e(),
-                      _vm._v(_vm._s(item.ttuloDeQueja) + "\n                ")
-                    ]
-                  )
-                ]
-              )
+                model: {
+                  value: item.idPost,
+                  callback: function($$v) {
+                    _vm.$set(item, "idPost", $$v)
+                  },
+                  expression: "item.idPost"
+                }
+              },
+              [
+                item.quejaSolucionada == "Si"
+                  ? _c("span", { staticClass: "icon icon-check" })
+                  : _vm._e(),
+                _vm._v(_vm._s(item.ttuloDeQueja) + "\n            ")
+              ]
+            )
+          })
+        )
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _vm.textArea
+      ? _c("div", { staticClass: "message" }, [
+          _c(
+            "div",
+            { staticClass: "message__content" },
+            [
+              _c("div", { staticClass: "message__header me" }, [
+                _c("h3", { staticClass: "message__h3" }, [
+                  _vm._v(_vm._s(_vm.currentTitle))
+                ]),
+                _vm._v(" "),
+                _c("p", {
+                  staticClass: "message__txt",
+                  domProps: { innerHTML: _vm._s(_vm.currentDescription) }
+                })
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.messages, function(item) {
+                return _c(
+                  "div",
+                  {
+                    class: [
+                      item.usuario == "Atrápalo" ? "atrapalo_user" : "me"
+                    ],
+                    model: {
+                      value: item.idPost,
+                      callback: function($$v) {
+                        _vm.$set(item, "idPost", $$v)
+                      },
+                      expression: "item.idPost"
+                    }
+                  },
+                  [_c("p", { domProps: { innerHTML: _vm._s(item.mensaje) } })]
+                )
+              })
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "message__sms" }, [
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.info_mensaje,
+                  expression: "info_mensaje"
+                }
+              ],
+              staticClass: "item__input",
+              attrs: { placeholder: "Escribe algún comentario..." },
+              domProps: { value: _vm.info_mensaje },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.info_mensaje = $event.target.value
+                }
+              }
             }),
             _vm._v(" "),
-            _vm.textArea
-              ? _c(
-                  "div",
-                  { staticClass: "column message" },
-                  [
-                    _c("h3", { staticClass: "message__h3" }, [
-                      _vm._v(_vm._s(_vm.currentTitle))
-                    ]),
-                    _vm._v(" "),
-                    _c("p", {
-                      domProps: { innerHTML: _vm._s(_vm.currentDescription) }
-                    }),
-                    _vm._v(" "),
-                    _vm._l(_vm.messages, function(item) {
-                      return _c(
-                        "div",
-                        {
-                          model: {
-                            value: item.idPost,
-                            callback: function($$v) {
-                              _vm.$set(item, "idPost", $$v)
-                            },
-                            expression: "item.idPost"
-                          }
-                        },
-                        [
-                          item.usuario == "Atrápalo"
-                            ? _c("div", [_vm._v("Atrápalo")])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          item.usuario != "Atrápalo"
-                            ? _c("div", [_vm._v("Me")])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("p", [_vm._v(_vm._s(item.queja))]),
-                          _vm._v(" "),
-                          _c("p", {
-                            domProps: { innerHTML: _vm._s(item.mensaje) }
-                          })
-                        ]
-                      )
-                    }),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c("textarea", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.info_mensaje,
-                            expression: "info_mensaje"
-                          }
-                        ],
-                        domProps: { value: _vm.info_mensaje },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.info_mensaje = $event.target.value
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "button" }, [
-                        _c("button", { on: { click: _vm.createResponse } }, [
-                          _vm._v("Upload Information")
-                        ])
-                      ])
-                    ])
-                  ],
-                  2
-                )
-              : _vm._e()
-          ],
-          2
-        )
-      ])
-    ],
-    1
-  )
+            _c(
+              "span",
+              { staticClass: "btn", on: { click: _vm.createResponse } },
+              [_vm._v("Enviar")]
+            )
+          ])
+        ])
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

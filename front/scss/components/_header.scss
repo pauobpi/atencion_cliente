@@ -1,0 +1,48 @@
+.header {
+    border-bottom: solid 1px #f9f9f9;
+    position: relative;
+    float: left;
+    padding-bottom: 22px;
+
+    &__img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        float: left;
+    }
+
+    &__name {
+        float: left;
+        width: calc(100% - 60px);
+        font-weight: 600;
+        margin: 3px 0 0 10px;
+        font-size: 16px;
+    }
+
+    &__email {
+        float: left;
+        width: calc(100% - 60px);
+        margin: 0 0 0 10px;
+        font-size: 15px;
+        color: grey;
+    }
+}
+
+.header__new-complain {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    width: 50px;
+    border-radius: 50%;
+    height: 50px;
+    background: map-get($colors, red);
+    color: #fff;
+    text-align: center;
+    font-size: 30px;
+    line-height: 50px;
+    cursor: pointer;
+
+    &:hover {
+        background: map-get($colors, red-hover);
+    }
+}

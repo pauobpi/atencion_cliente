@@ -1,0 +1,131 @@
+.complains {
+    background: #fff;
+    padding: 35px 25px;
+    border-radius: 0 0 4px 4px;
+    width: 320px;
+    position: absolute;
+    height: 100%;
+
+    .icon-check {
+        font-size: 10px;
+        float: right;
+    }
+
+    .done {
+        color: map-get($colors, green);
+    }
+
+    &__list {
+        margin-bottom: 8px;
+        cursor: pointer;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+
+        &:hover {
+            color: map-get($colors, red);
+        }
+    }
+
+    &__ul {
+        margin-top: 20px;
+        position: relative;
+        float: left;
+        width: 100%;
+    }
+}
+
+.message {
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 410px);
+    right: 89px;
+
+    &__content {
+        overflow: auto;
+        margin-bottom: 10px;
+        padding: 0 10px;
+        position: absolute;
+        height: calc(100% - 97px);
+        width: 100%;
+
+        .message__header {
+            margin: 20px 0 25px !important;
+            width: 100%;
+            max-width: 100% !important;
+        }
+    }
+
+    
+
+    &__h3 {
+        margin: 0;
+        font-size: 20px;
+    }
+
+    &__txt {
+        margin: 3px 0 0 20px;
+        font-size: 18px;
+    }
+
+    .item__input {
+        width: calc(100% - 140px);
+        margin-bottom: 0;
+        border: none;
+        height: 42px;
+    }
+
+    &__sms {
+        padding: 20px 40px 20px 20px;
+        border-radius: 5px;
+        background:  map-get($colors, gray--light);
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        font-size: 15px;
+    }
+
+    %user {
+        max-width: 80%;
+        clear: both;
+        padding: 10px 20px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        line-height: 25px;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .atrapalo_user {
+        float: left;
+        @extend %user;
+        background:  #fff;
+        color: map-get($colors, red);
+    }
+
+    .me {
+        float: right;
+        @extend %user;
+        background: #fff;
+    }
+
+    .btn {
+        background: map-get($colors, red);
+        position: relative;
+        float: right;
+        clear: both;
+        margin-top: 0;
+        padding: 10px 40px;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover{
+            background: map-get($colors, red-hover);
+            color: #fff;
+        }
+
+    }
+}
