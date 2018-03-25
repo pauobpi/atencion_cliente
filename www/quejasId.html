@@ -16,7 +16,7 @@
         <input type="text" v-model="filter_queja"> 
         <span @click="verquejaconid" class="button"><button>Buscar</button></span>
         <br/>
-        <p>Conversaciones con el usuario</p>
+        <p><strong>Conversaciones con el usuario</strong></p>
         <div v-for="item in example" v-model="item.idPost">
             <strong>{{ item.usuario }}</strong>
             <p v-html="item.mensaje"></p>

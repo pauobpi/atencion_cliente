@@ -3,12 +3,13 @@
         <div class="complains">
             <headerclass :id="id"/>
             <ul class="complains__ul">
-                <li v-for="item in complain" v-model="item.idPost"  @click="complainsResponses(item.idqueja, item.ttuloDeQueja, item.descripcin)" class="complains__list" :class="[item.quejaSolucionada == 'Si' ? 'done' : '', idActive == item.idqueja ? 'active' : '']">
+                <li v-for="item in complain" v-model="item.idPost"  @click="complainsResponses(item.idqueja, item.ttuloDeQueja, item.descripcin, item.quejaSolucionada)" class="complains__list" :class="[item.quejaSolucionada == 'Si' ? 'done' : '', idActive == item.idqueja ? 'active' : '']">
                     <span v-if="item.quejaSolucionada == 'Si'" class="icon icon-check"></span>{{ item.ttuloDeQueja }}
                 </li>
             </ul>
         </div>
         <div v-if="textArea" class="message">
+            <div v-if="solved" class="solved"><span class="icon icon-check"></span>Petición solucionada</div>
             <div class="message__content">
                 <div class="message__header me">
                     <h3 class="message__h3">{{ currentTitle }}</h3>

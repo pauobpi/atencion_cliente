@@ -3827,7 +3827,9 @@ const SHA256 = __webpack_require__(5);
             info_mensaje: '',
             currentDescription: '',
             currentTitle: '',
+            solved: false,
             idActive: ''
+
         };
     },
     methods: {
@@ -3837,11 +3839,12 @@ const SHA256 = __webpack_require__(5);
                 this.complain = result.slice().reverse();
             });
         },
-        complainsResponses(idResponse, title, description) {
+        complainsResponses(idResponse, title, description, solucionada) {
             this.id_message = idResponse;
             this.currentDescription = description;
             this.currentTitle = title;
             this.idActive = idResponse;
+            this.solved = solucionada == 'Si' ? true : false;
             var information = [idResponse];
             transferBytes.connect('46ab88100d6d0071926776d015d65111', this.languaje, information).then(result => {
                 this.textArea = true;
@@ -22885,7 +22888,8 @@ var render = function() {
                     _vm.complainsResponses(
                       item.idqueja,
                       item.ttuloDeQueja,
-                      item.descripcin
+                      item.descripcin,
+                      item.quejaSolucionada
                     )
                   }
                 },
@@ -22912,6 +22916,13 @@ var render = function() {
     _vm._v(" "),
     _vm.textArea
       ? _c("div", { staticClass: "message" }, [
+          _vm.solved
+            ? _c("div", { staticClass: "solved" }, [
+                _c("span", { staticClass: "icon icon-check" }),
+                _vm._v("Petición solucionada")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
           _c(
             "div",
             { staticClass: "message__content" },

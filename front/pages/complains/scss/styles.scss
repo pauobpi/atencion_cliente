@@ -38,13 +38,13 @@
 .message {
     position: absolute;
     height: 100%;
-    width: calc(100% - 410px);
-    right: 89px;
+    width: calc(100% - 320px);
+    right: 0;
 
     &__content {
         overflow: auto;
         margin-bottom: 10px;
-        padding: 0 10px;
+        padding: 0 20px;
         position: absolute;
         height: calc(100% - 97px);
         width: 100%;
@@ -75,9 +75,19 @@
         height: 42px;
     }
 
+    .solved {
+        color: map-get($colors, green);
+        padding: 20px 20px 0;
+        margin: 0;
+
+        .icon-check {
+            font-size: 12px;
+            margin-right: 8px;
+        }
+    }
+
     &__sms {
-        padding: 20px 40px 20px 20px;
-        border-radius: 5px;
+        padding: 20px;
         background:  map-get($colors, gray--light);
         position: absolute;
         bottom: 0;
@@ -92,6 +102,7 @@
         margin-bottom: 10px;
         border-radius: 5px;
         line-height: 25px;
+        border-bottom: solid 2px #f0f0f0;
 
         p {
             margin: 0;

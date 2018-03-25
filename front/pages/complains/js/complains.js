@@ -21,7 +21,9 @@ export default {
             info_mensaje: '',
             currentDescription: '',
             currentTitle: '',
-            idActive: ''
+            solved: false,
+            idActive: '',
+            
         };
     },
     methods: {
@@ -31,11 +33,12 @@ export default {
                 this.complain = result.slice().reverse();
             });
         },
-        complainsResponses(idResponse, title, description) {
+        complainsResponses(idResponse, title, description, solucionada) {
             this.id_message = idResponse;
             this.currentDescription = description;
             this.currentTitle = title;
             this.idActive = idResponse;
+            this.solved = solucionada == 'Si' ? true : false ;
             var information = [idResponse];
             transferBytes.connect('46ab88100d6d0071926776d015d65111', this.languaje, information).then((result) => {
                 this.textArea = true;
