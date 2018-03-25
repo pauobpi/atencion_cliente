@@ -12,10 +12,11 @@
 
 <body>
     <div id="verquejaconid">
-        <h3>Buscar quejas mediante ID</h3>
+        <h3>ID de queja</h3>
         <input type="text" v-model="filter_queja"> 
-        <span @click="verquejaconid">Buscar</span>
-
+        <span @click="verquejaconid" class="button"><button>Buscar</button></span>
+        <br/>
+        <p>Conversaciones con el usuario</p>
         <div v-for="item in example" v-model="item.idPost">
             <strong>{{ item.usuario }}</strong>
             <p v-html="item.mensaje"></p>
