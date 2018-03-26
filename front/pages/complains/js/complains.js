@@ -22,8 +22,7 @@ export default {
             currentDescription: '',
             currentTitle: '',
             solved: false,
-            idActive: '',
-            
+            idActive: ''
         };
     },
     methods: {
@@ -40,6 +39,7 @@ export default {
             this.idActive = idResponse;
             this.solved = solucionada == 'Si' ? true : false ;
             var information = [idResponse];
+
             transferBytes.connect('46ab88100d6d0071926776d015d65111', this.languaje, information).then((result) => {
                 this.textArea = true;
                 this.messages = result.slice().reverse();
@@ -47,10 +47,14 @@ export default {
         },
         createResponse() {
             var information = [this.id_message, 'Usuario', this.info_mensaje];
+            if(this.info_mensaje.indexOf('<?php') != -1) {
+                alert("ZOOOOORROOOOOOOO!");
+                return;
+            }
             transferBytes.connect('04e6ce7491f075efa7e1ecfefd51c13d', this.languaje, information).then((result) => {
                 this.complainsResponses(this.id_message, this.currentTitle, this.currentDescription);
                 this.info_mensaje = '';
-            }); 
+            });
         }
     },
     mounted() {
