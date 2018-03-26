@@ -22916,17 +22916,17 @@ var render = function() {
     _vm._v(" "),
     _vm.textArea
       ? _c("div", { staticClass: "message" }, [
-          _vm.solved
-            ? _c("div", { staticClass: "solved" }, [
-                _c("span", { staticClass: "icon icon-check" }),
-                _vm._v("Petición solucionada")
-              ])
-            : _vm._e(),
-          _vm._v(" "),
           _c(
             "div",
             { staticClass: "message__content" },
             [
+              _vm.solved
+                ? _c("div", { staticClass: "solved" }, [
+                    _c("span", { staticClass: "icon icon-check" }),
+                    _vm._v("Petición solucionada")
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
               _c("div", { staticClass: "message__header me" }, [
                 _c("h3", { staticClass: "message__h3" }, [
                   _vm._v(_vm._s(_vm.currentTitle))

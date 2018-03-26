@@ -9,8 +9,8 @@
             </ul>
         </div>
         <div v-if="textArea" class="message">
-            <div v-if="solved" class="solved"><span class="icon icon-check"></span>Petición solucionada</div>
             <div class="message__content">
+                <div v-if="solved" class="solved"><span class="icon icon-check"></span>Petición solucionada</div>
                 <div class="message__header me">
                     <h3 class="message__h3">{{ currentTitle }}</h3>
                     <p class="message__txt" v-html="currentDescription"></p>
