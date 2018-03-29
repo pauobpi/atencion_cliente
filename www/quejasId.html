@@ -7,18 +7,47 @@
     <link rel="shortcut icon" type="image/ico" href="http://www.transferbytes.io/img/favicon.ico" />
     <title>TransferBytes Example</title>
     <link rel="stylesheet" href="http://www.transferbytes.io/transfer/styles.css">
+    <style>
+        .redBorder {
+            border: solid 1px #de0000 !important;
+        }
+        .button button{
+            background:#de0000 !important;
+        }
+    </style>
 </head>
 
 <body>
     <div id="verquejaconid">
         <h3>ID de queja</h3>
         <input type="text" v-model="filter_queja">
-        <span @click="verquejaconid" class="button"><button>Buscar</button></span>
+        <span @click="complainWithId" class="button"><button>Buscar</button></span>
         <br/>
         <p><strong>Conversaciones con el usuario</strong></p>
-        <div v-for="item in example" v-model="item.idPost">
+        <div v-for="item in complain">
+            <h3>{{ item.ttuloDeQueja }}</h3>
+            <p v-html="item.descripcin"></p>
+            <label v-if="item.capturaPantalla"><strong>Captura pantalla</strong></label>
+            <ul v-if="item.capturaPantalla">
+                <li v-for="image in item.capturaPantalla"><img :src="'http://www.transferbytes.io/src/imgs/init_' + image + '.jpg'" /></li>
+            </ul>
+            <span v-if="item.quejaSolucionada == 'No' && closeComplain == false">
+                <p>La Petición no está solucionada, quieres marcarla como solucionada ahora?</p>
+                <span class="button"><button @click ="resolverComplain(item.idPost)" >Solucionar petición</button></span>
+            </span>
+            <span v-else="">
+                <p style="color:#8FF39E;">Petición solucionada</p>
+            </span>
+        </div>
+        <div v-for="item in responses" v-model="item.idPost" :class="[item.usuario == 'Atrápalo' ? 'redBorder' : '']">
             <strong>{{ item.usuario }}</strong>
             <p v-html="item.mensaje"></p>
+        </div>
+        <div v-if="showNewComplain">
+            <label><strong>Mensaje</strong></label>
+            <textarea v-model="info_mensaje"></textarea>
+
+            <span class="button"><button v-on:click ="createResponse">{{ generateNewResponse }}</button></span>
         </div>
     </div>
 
@@ -28,15 +57,53 @@
         new Vue({
             el: '#verquejaconid',
             data: {
-                example: null,
+                responses: null,
+                complain: null,
                 languaje: 'EN', // Change languaje if you want
-                filter_queja: ''
+                filter_queja: '',
+                info_quejaSolucionada: '',
+                closeComplain: false,
+                info_queja: '',
+                info_usuario: '',
+                info_mensaje: '',
+                showNewComplain: false,
+                generateNewResponse: 'Generar respuesta'
             },
             methods: {
-                verquejaconid() {
+                complainWithId() {
+                    var information = [this.filter_queja];
+                    if(information[0] == '') {
+                        alert("Debes introducir un ID de queja");
+                        return;
+                    }
+
+                    transferBytes.connect('3fcc74303d95a9b67e6f8baa7bff6353', this.languaje, information).then((result) => {
+                        if(result.length != 0) {
+                            this.complain = result;
+                            this.showNewComplain = true;
+                            this.responsensesWithId();
+                        }else{
+                            alert("No hemos encontrado ningún ID que coincida");
+                        }
+                    });
+                },
+                responsensesWithId() {
                     var information = [this.filter_queja];
                     transferBytes.connect('4f2109891795a793556a950c71b33bdb', this.languaje, information).then((result) => {
-                        this.example = result.slice().reverse();
+                        this.responses = result.slice().reverse();
+                    });
+                },
+                resolverComplain(idPost) {
+                    transferBytes.connect('7def1100e18a9bab3df7860d6248e36e', this.languaje, ['Si'], idPost).then((result) => {
+                        this.closeComplain = true;
+                    });
+                },
+                createResponse() {
+                    this.generateNewResponse = 'Subiendo respuesta...';
+                    var information = [this.filter_queja, 'Atrápalo', this.info_mensaje];
+                    transferBytes.connect('04e6ce7491f075efa7e1ecfefd51c13d', this.languaje, information).then((result) => {
+                        this.generateNewResponse = 'Generar respuesta';
+                        this.responsensesWithId();
                     });
                 }
             }
