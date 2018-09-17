@@ -1,6 +1,7 @@
 import CryptoJS from 'crypto-js';
 
 const SHA256 = require('crypto-js/sha256');
+import { userConfig, license } from '../../../config/config';
 
 export default {
     metaInfo: {
@@ -20,8 +21,13 @@ export default {
     methods: {
         verifyUser() {
             var information = [this.filter_email, CryptoJS.SHA256(this.filter_password + this.filter_email).toString()];
-            transferBytes.connect('5ca27093da1a9a9f97535e6d634acba2', this.languaje, information).then((result) => {
-                console.log(result);
+            transferBytes.connect({
+                id: userConfig.verifyUser,
+                license: license,
+                languaje: this.languaje,
+                content: information,
+                idPost: 0
+            }).then((result) => {
                 if(this.resultReturnData(result)) {
                     window.location = `#/user/${result[0].iduser}`;
                 }

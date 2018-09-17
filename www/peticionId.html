@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" type="image/ico" href="http://www.transferbytes.io/img/favicon.ico" />
     <title>TransferBytes Example</title>
-    <link rel="stylesheet" href="http://www.transferbytes.io/transfer/styles.css">
+    <link rel="stylesheet" href="http://localhost/src/transfer/styles.css">
     <style>
         .redBorder {
             border: solid 1px #de0000 !important;
@@ -19,19 +19,20 @@
 
 <body>
     <div id="verquejaconid">
-        <h3>ID de queja</h3>
+        <a href="peticionesNoCerradas.html">Ver peticiones no solucionadas</a>
+        <h3>ID de Petición</h3>
         <input type="text" v-model="filter_queja">
         <span @click="complainWithId" class="button"><button>Buscar</button></span>
         <br/>
         <p><strong>Conversaciones con el usuario</strong></p>
         <div v-for="item in complain">
-            <h3>{{ item.ttuloDeQueja }}</h3>
+            <h3>{{ item.ttuloDePeticin }}</h3>
             <p v-html="item.descripcin"></p>
-            <label v-if="item.capturaPantalla"><strong>Captura pantalla</strong></label>
-            <ul v-if="item.capturaPantalla">
-                <li v-for="image in item.capturaPantalla"><img :src="'http://www.transferbytes.io/src/imgs/init_' + image + '.jpg'" /></li>
+            <ul v-if="item.capturaPantalla[0] != 0">
+                <label v-if="item.capturaPantalla"><strong>Captura de pantalla</strong></label>
+                <li v-for="image in item.capturaPantalla"><img :src="'http://localhost/src/assets/src/imgs/init_' + image + '.jpg'" /></li>
             </ul>
-            <span v-if="item.quejaSolucionada == 'No' && closeComplain == false">
+            <span v-if="item.peticinSolucionada == 'No' && closeComplain == false">
                 <p>La Petición no está solucionada, quieres marcarla como solucionada ahora?</p>
                 <span class="button"><button @click ="resolverComplain(item.idPost)" >Solucionar petición</button></span>
             </span>
@@ -39,7 +40,7 @@
                 <p style="color:#8FF39E;">Petición solucionada</p>
             </span>
         </div>
-        <div v-for="item in responses" v-model="item.idPost" :class="[item.usuario == 'Atrápalo' ? 'redBorder' : '']">
+        <div v-for="item in responses" v-model="item.idPost" :class="[item.usuario == 'Empresa' ? 'redBorder' : '']">
             <strong>{{ item.usuario }}</strong>
             <p v-html="item.mensaje"></p>
         </div>
@@ -51,8 +52,8 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="http://www.transferbytes.io/transfer/transfer.min.js"></script>
+    <script src="../node_modules/vue/dist/vue.min.js"></script>
+    <script src="http://localhost/src/transfer/transfer.min.js"></script>
     <script>
         new Vue({
             el: '#verquejaconid',
@@ -60,24 +61,31 @@
                 responses: null,
                 complain: null,
                 languaje: 'EN', // Change languaje if you want
-                filter_queja: '',
+                filter_queja: localStorage.getItem('viewDetail'),
                 info_quejaSolucionada: '',
                 closeComplain: false,
                 info_queja: '',
                 info_usuario: '',
                 info_mensaje: '',
                 showNewComplain: false,
-                generateNewResponse: 'Generar respuesta'
+                generateNewResponse: 'Generar respuesta' 
             },
             methods: {
                 complainWithId() {
                     var information = [this.filter_queja];
+                    
                     if(information[0] == '') {
                         alert("Debes introducir un ID de queja");
                         return;
                     }
 
-                    transferBytes.connect('3fcc74303d95a9b67e6f8baa7bff6353', this.languaje, information).then((result) => {
+                    transferBytes.connect({
+                        id: 'a00ee187a12e72b64fb85823531ecaa4',
+                        license: 'aaa',
+                        languaje: this.languaje,
+                        content: information,
+                        idPost: 0
+                    }).then((result) => {
                         if(result.length != 0) {
                             this.complain = result;
                             this.showNewComplain = true;
@@ -89,23 +97,46 @@
                 },
                 responsensesWithId() {
                     var information = [this.filter_queja];
-                    transferBytes.connect('4f2109891795a793556a950c71b33bdb', this.languaje, information).then((result) => {
+
+                    transferBytes.connect({
+                        id: 'd3224676b43110e8b85c730f84386c54',
+                        license: 'aaa',
+                        languaje: this.languaje,
+                        content: information,
+                        idPost: 0
+                    }).then((result) => {
                         this.responses = result.slice().reverse();
                     });
                 },
                 resolverComplain(idPost) {
-                    transferBytes.connect('7def1100e18a9bab3df7860d6248e36e', this.languaje, ['Si'], idPost).then((result) => {
+                    transferBytes.connect({
+                        id: '8acc51937a711b44f17589acdaee36b6',
+                        license: 'aaa',
+                        languaje: this.languaje,
+                        content: ['Si'],
+                        idPost: idPost
+                    }).then((result) => {
                         this.closeComplain = true;
                     });
                 },
                 createResponse() {
                     this.generateNewResponse = 'Subiendo respuesta...';
-                    var information = [this.filter_queja, 'Atrápalo', this.info_mensaje];
-                    transferBytes.connect('04e6ce7491f075efa7e1ecfefd51c13d', this.languaje, information).then((result) => {
+                    var information = [this.filter_queja, 'Empresa', this.info_mensaje];
+
+                    transferBytes.connect({
+                        id: '7d5eaf05aa331beaecc7595fffdb32df',
+                        license: 'aaa',
+                        languaje: this.languaje,
+                        content: information,
+                        idPost: 0
+                    }).then((result) => {
                         this.generateNewResponse = 'Generar respuesta';
                         this.responsensesWithId();
                     });
                 }
+            },
+            mounted() {
+                this.complainWithId();
             }
         });
     </script>

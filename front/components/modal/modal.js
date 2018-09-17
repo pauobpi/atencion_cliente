@@ -1,6 +1,5 @@
 import CryptoJS from 'crypto-js';
-
-import modal from '../modal/modal.vue';
+import { complainsConfig, license } from '../../config/config';
 
 const SHA256 = require('crypto-js/sha256');
 
@@ -26,7 +25,13 @@ export default {
     methods: {
         newComplain() {
             var information = [CryptoJS.SHA256(this.id + this.info_ttuloDeQueja).toString(), this.id, this.info_ttuloDeQueja, this.info_descripcin, this.info_capturaPantalla, 'No', this.info_inBbdd];
-            transferBytes.connect('83d1d22f0baea7cebcd43fc7e93fc7ac', this.languaje, information).then((result) => {
+            transferBytes.connect({
+                id: complainsConfig.newComplain,
+                license: license,
+                languaje: this.languaje,
+                content: information,
+                idPost: 0
+            }).then(() => {
                 this.$parent.hideComplainModal();
                 this.$parent.$parent.getUserComplains();
             });

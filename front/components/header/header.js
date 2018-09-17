@@ -1,4 +1,5 @@
 import modal from '../modal/modal.vue';
+import { userConfig, license } from '../../config/config';
 
 export default {
     data() {
@@ -12,7 +13,14 @@ export default {
     methods: {
         userInformation() {
             var information = [this.id];
-            transferBytes.connect('4bcbeaaf56ea96026755f455de5c4f96', this.languaje, information).then((result) => {
+
+            transferBytes.connect({
+                id: userConfig.userInfo,
+                license: license,
+                languaje: this.languaje,
+                content: information,
+                idPost: 0
+            }).then((result) => {
                 this.user = result;
             });
         },

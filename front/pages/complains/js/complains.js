@@ -1,6 +1,7 @@
 import CryptoJS from 'crypto-js';
 
 import headerclass from '../../../components/header/header.vue';
+import { complainsConfig, responsesConfig, license } from '../../../config/config';
 
 const SHA256 = require('crypto-js/sha256');
 
@@ -28,7 +29,13 @@ export default {
     methods: {
         getUserComplains() {
             var information = [this.id];
-            transferBytes.connect('7cac5491b85b5ebaac12da319e916eb2', this.languaje, information).then((result) => {
+            transferBytes.connect({
+                id: complainsConfig.showAllComplains,
+                license: license,
+                languaje: this.languaje,
+                content: information,
+                idPost: 0
+            }).then((result) => {
                 this.complain = result.slice().reverse();
             });
         },
@@ -40,7 +47,13 @@ export default {
             this.solved = solucionada == 'Si' ? true : false ;
             var information = [idResponse];
 
-            transferBytes.connect('46ab88100d6d0071926776d015d65111', this.languaje, information).then((result) => {
+            transferBytes.connect({
+                id: responsesConfig.showResponses,
+                license: license,
+                languaje: this.languaje,
+                content: information,
+                idPost: 0
+            }).then((result) => {
                 this.textArea = true;
                 this.messages = result.slice().reverse();
             });
@@ -48,11 +61,22 @@ export default {
         createResponse() {
             var information = [this.id_message, 'Usuario', this.info_mensaje];
             if(this.info_mensaje.indexOf('<?php') != -1) {
-                alert("ZOOOOORROOOOOOOO!");
+                alert("ups!! Hacker a la vista");
                 return;
             }
-            transferBytes.connect('04e6ce7491f075efa7e1ecfefd51c13d', this.languaje, information).then((result) => {
-                this.complainsResponses(this.id_message, this.currentTitle, this.currentDescription);
+            
+            transferBytes.connect({
+                id: responsesConfig.createResponse,
+                license: license,
+                languaje: this.languaje,
+                content: information,
+                idPost: 0
+            }).then(() => {
+                this.complainsResponses(
+                    this.id_message, 
+                    this.currentTitle, 
+                    this.currentDescription
+                );
                 this.info_mensaje = '';
             });
         }

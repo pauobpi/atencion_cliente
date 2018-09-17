@@ -7,15 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" type="image/ico" href="http://www.transferbytes.io/img/favicon.ico" />
     <title>Atrápalo</title>
-    <link rel="stylesheet" href="http://www.transferbytes.io/transfer/styles.css">
+    <link rel="stylesheet" href="http://localhost/src/transfer/styles.css">
 </head>
 
 <body>
     <div id="peticionessincerrar">
+        <a href="peticionId.html">Encontrar Petición por id</a>
         <h3>IDs de Peticiones no cerradas</h3>
         <div v-for="item in example" v-model="item.idPost">
-            <label v-if="item.idqueja"><strong>id_queja</strong></label>
-            <p>{{ item.idqueja }}</p>
+            <label v-if="item.idqueja"><strong>id_peticion</strong></label>
+            <p>{{ item.idpeticion }}</p>
+            <span @click="viewDetail(item.idpeticion)" class="button"><button>ver detalle</button></span>
         </div>
         <div v-if="noPeticiones">
             <h3>Estupendo!!!!</h3>
@@ -23,8 +25,8 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="http://www.transferbytes.io/transfer/transfer.min.js"></script>
+    <script src="../node_modules/vue/dist/vue.min.js"></script>
+    <script src="http://localhost/src/transfer/transfer.min.js"></script>
     <script>
         new Vue({
             el: '#peticionessincerrar',
@@ -36,13 +38,23 @@
             methods: {
                 peticionessincerrar() {
                     var information = [];
-                    transferBytes.connect('2edf1223ca806ac8a02a9e94a151b5cf', this.languaje, information).then((result) => {
+                    transferBytes.connect({
+                        id: '759710e15e95e39fbde94284df493899',
+                        license: 'aaa',
+                        languaje: this.languaje,
+                        content: information,
+                        idPost: 0
+                    }).then((result) => {
                         if(result.length != 0) {
                             this.example = result;
                         }else {
                             this.noPeticiones = true;
                         }   
                     });
+                },
+                viewDetail(id) {
+                    localStorage.setItem('viewDetail',id);
+                    window.location = "peticionId.html";
                 }
             },
             mounted() {

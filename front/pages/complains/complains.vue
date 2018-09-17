@@ -3,8 +3,8 @@
         <div class="complains">
             <headerclass :id="id"/>
             <ul class="complains__ul">
-                <li v-for="item in complain" v-model="item.idPost"  @click="complainsResponses(item.idqueja, item.ttuloDeQueja, item.descripcin, item.quejaSolucionada)" class="complains__list" :class="[item.quejaSolucionada == 'Si' ? 'done' : '', idActive == item.idqueja ? 'active' : '']">
-                    <span v-if="item.quejaSolucionada == 'Si'" class="icon icon-check"></span>{{ item.ttuloDeQueja }}
+                <li v-for="item in complain" v-model="item.idPost"  @click="complainsResponses(item.idpeticion, item.ttuloDePeticin, item.descripcin, item.peticinSolucionada)" class="complains__list" :class="[item.peticinSolucionada == 'Si' ? 'done' : '', idActive == item.idpeticion ? 'active' : '']">
+                    <span v-if="item.peticinSolucionada == 'Si'" class="icon icon-check"></span>{{ item.ttuloDePeticin }}
                 </li>
             </ul>
         </div>
@@ -15,7 +15,7 @@
                     <h3 class="message__h3">{{ currentTitle }}</h3>
                     <p class="message__txt" v-html="currentDescription"></p>
                 </div>
-                <div v-for="item in messages" v-model="item.idPost" :class="[item.usuario == 'Atrápalo' ? 'atrapalo_user' : 'me']">
+                <div v-for="item in messages" v-model="item.idPost" :class="[item.usuario == 'Empresa' ? 'atrapalo_user' : 'me']">
                     <p v-html="item.mensaje"></p>
                 </div>
             </div>
