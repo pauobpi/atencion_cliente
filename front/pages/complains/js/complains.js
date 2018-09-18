@@ -60,10 +60,6 @@ export default {
         },
         createResponse() {
             var information = [this.id_message, 'Usuario', this.info_mensaje];
-            if(this.info_mensaje.indexOf('<?php') != -1) {
-                alert("ups!! Hacker a la vista");
-                return;
-            }
             
             transferBytes.connect({
                 id: responsesConfig.createResponse,

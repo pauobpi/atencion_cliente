@@ -82,6 +82,10 @@
             font-size: 12px;
             margin-right: 8px;
         }
+
+        &.--not {
+            color: map-get($colors, black);
+        }
     }
 
     &__sms {
